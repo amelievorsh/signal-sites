@@ -1,0 +1,103 @@
+<!DOCTYPE html> 
+
+<html lang="en">
+  <head>
+<meta charset="utf-8"/>
+<meta name = "viewport" content = "width=device-width">
+<title>My First Webpage</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+  </head>
+  <style>
+  .h1 {
+  background-color: rgb(75, 150, 139);
+  padding: 2px;
+  width: 100%;
+  text-align: center;
+  font-family: "Lucida Console", Monospace;
+  font-size: 60px;
+  color:rgb(13, 68, 23)
+
+  
+  }
+.accordion {
+  background-color: rgb(123, 68, 123);
+  color: rgb(14, 0, 206);
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: center;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  font-size: 20px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover {
+  background-color: rgb(151, 117, 38);
+}
+
+    .active, .accordion:hover {
+  background-color: rgb(11, 117, 38);
+}
+
+.accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+    
+  </style>
+
+  <body>
+  <div class="h1">
+  <h1>Places of Merribek</h1>
+</div>
+
+    <h2>Share your experience in merribek, what places means to you and why</h2>
+
+    <button class="accordion">Section 1</button>
+<div class="panel">
+  <p>What is the place you would take someone in the merribek area for the first time</p>
+</div>
+
+<button class="accordion">Section 2</button>
+<div class="panel">
+  <p>Whats special about this place</p>
+</div>
+
+<button class="accordion">Section 3</button>
+<div class="panel">
+  <p>record a short memory or reflection about what makes this place special to you</p>
+</div>
+
+    
+    <p>Welcome to my first webpage!</p>
+  </body>
+
+  <script>
+
+    var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+</script>
+</html>
