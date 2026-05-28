@@ -41,6 +41,12 @@
       margin-top: 0.5rem; /* 8px */
     }
 
+    .accordion-gif {
+  width: 2rem;  /* Equal to 32px by default, scales with device settings */
+  height: 2rem; /* Keeps it square */
+  object-fit: contain;
+}
+    
     .active, .accordion:hover {
       background-color: rgba(123, 68, 123, 0.7);
     }
@@ -139,6 +145,7 @@
     </p>
     
     <button class="accordion">Section 1</button>
+    <img src="https://i.gifer.com/ZZ5H.gif" alt="Signal Icon" class="accordion-gif">
     <div class="panel" data-section="Section-1">
       <p><strong>What is the place you would take someone in the Merri-bek area for the first time?</strong></p>
       <div class="audio-block">
