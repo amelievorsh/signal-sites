@@ -7,6 +7,7 @@
   <style>
     .body {
       background-image: url('IMG_0048.JPG');
+      background-blend-mode: lighten;
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: cover;
@@ -40,12 +41,21 @@
       font-size: 1.25rem; /* 20px */
       margin-top: 0.5rem; /* 8px */
     }
+display: flex;
+      align-items: center;    /* Vertically centers text and GIF */
+      justify-content: center; /* Keeps the title text & GIF grouped in the center */
+      gap: 0.75rem;           /* Responsive space between the GIF and text title */
+    }
 
-    .accordion-gif {
-  width: 2rem;  /* Equal to 32px by default, scales with device settings */
-  height: 2rem; /* Keeps it square */
-  object-fit: contain;
-}
+    /*  Responsive styling for the title GIFs */
+    .title-gif {
+      width: 2.25rem;         /* ~36px, scales based on user device font size */
+      height: 2.25rem;
+      object-fit: contain;
+      flex-shrink: 0;         /* Prevents GIF distortion */
+    }
+  
+   
     
     .active, .accordion:hover {
       background-color: rgba(123, 68, 123, 0.7);
@@ -144,10 +154,13 @@
      ✬ Thank you for contributing! ✬
     </p>
     
-    <button class="accordion">Section 1</button>
-    <img src="https://i.gifer.com/ZZ5H.gif" alt="Signal Icon" class="accordion-gif">
+    <button class="accordion">
+      <img src="leaf.gif" alt="Signal Icon" class="title-gif">
+      <span>Section 1</span>
+    </button>
+   
     <div class="panel" data-section="Section-1">
-      <p><strong>What is the place you would take someone in the Merri-bek area for the first time?</strong></p>
+      <p><strong>What is the place you would take someone in the Merri-bek area for the first time? Describe it's location and name if possible.</strong></p>
       <div class="audio-block">
         <button class="btn btn-record action-record">Record</button>
         <button class="btn btn-stop action-stop" disabled>Stop</button>
@@ -175,7 +188,7 @@
 
     <button class="accordion">Section 3</button>
     <div class="panel" data-section="Section-3">
-      <p><strong>Record a short memory or reflection about what makes this place special to you.</strong></p>
+      <p><strong>When did you first discover this place, what makes it so special? </strong></p>
       <div class="audio-block">
         <button class="btn btn-record action-record">Record</button>
         <button class="btn btn-stop action-stop" disabled>Stop</button>
