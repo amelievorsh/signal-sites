@@ -1,0 +1,354 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Signals</title>
+  <style>
+    .body {
+      background-color: rgba(100, 10, 0, 0.1);
+      font-family: "Arial Narrow", sans-serif;
+      padding: 0.9375rem; /* 15px */
+      text-align: center;
+      color: rgb(60, 20, 60);
+    }
+    
+    .h1 {
+      background-color: rgba(105, 10, 19, 0.3);
+      padding: 0.625rem; /* 10px */
+      width: 100%;
+      text-align: center;
+      font-family: "Lucida Console", Monospace;
+      font-size: 2.8125rem; /* 45px */
+      color: rgb(123, 68, 123);
+    }
+
+    .accordion {
+      background-color: rgb(123, 68, 123);
+      color: white;
+      cursor: pointer;
+      padding: 1.125rem; /* 18px */
+      width: 100%;
+      text-align: center;
+      border: none;
+      outline: none;
+      transition: 0.4s;
+      font-size: 1.25rem; /* 20px */
+      margin-top: 0.5rem; /* 8px */
+    }
+
+    .active, .accordion:hover {
+      background-color: rgba(123, 68, 123, 0.7);
+    }
+
+    .accordion:after {
+      content: '\002B';
+      color: #fff;
+      font-weight: bold;
+      float: right;
+      margin-left: 0.3125rem; /* 5px */
+    }
+
+    .active:after {
+      content: "\2212";
+    }
+
+    .panel {
+      padding: 0.9375rem 1.125rem; /* 15px 18px */
+      background-color: rgba(255, 255, 255, 0.4);
+      display: none;
+      overflow: hidden;
+      text-align: left;
+    }
+
+    .audio-block { 
+      margin-top: 0.9375rem; /* 15px */ 
+      background: rgba(0,0,0,0.05); 
+      padding: 0.9375rem; /* 15px */ 
+      border-radius: 0.375rem; /* 6px */ 
+    }
+    
+    .btn { 
+      padding: 0.625rem 0.9375rem; /* 10px 15px */ 
+      margin-right: 0.5rem; /* 8px */ 
+      margin-bottom: 0.3125rem; /* 5px */
+      cursor: pointer; 
+      border: none; 
+      font-weight: bold; 
+      border-radius: 0.25rem; /* 4px */ 
+    }
+    
+    .btn-record { 
+      background-color: rgb(160, 20, 120); 
+      color: white; 
+    }
+   
+    .btn-stop { 
+      background-color: #ffbb33; 
+      color: black; 
+    }
+    
+    .btn-save { 
+      background-color: rgba(103, 168, 54, 1.0); 
+      color: white; 
+    }
+    
+    .btn-delete { 
+      background-color: rgba(255, 62, 96, 0.8); 
+      color: white; 
+    }
+    
+    .btn:disabled { 
+      opacity: 0.3; 
+      cursor: not-allowed; 
+    }
+    
+    .timer-display { 
+      font-family: monospace; 
+      font-size: 1.2em; 
+      color: rgb(100, 10, 0); 
+      margin-left: 0.625rem; /* 10px */
+      display: inline-block; 
+    }
+    
+    .status-msg { 
+      font-style: italic; 
+      font-size: 0.95em; 
+      margin-top: 0.5rem; /* 8px */ 
+      color: #333; 
+    }
+  </style>
+</head>
+
+<body>
+  <div class="body">
+    <div class="h1">
+      <h1>Site signals</h1>
+    </div>
+
+    <h2>Share your experience in Merri-bek, what places mean to you and why</h2>
+    <p style="max-width: 50rem; margin: 0 auto 1.25rem auto; text-align: justify; font-size: 1.1em;">
+      This survey is seeking to understand your relationship to places in the Merri-bek area through oral storytelling. You can record your response once, with a maximum of 30 seconds per question. When you are finished, press Stop, then click Save to add to the community archive. Thank you for contributing!
+    </p>
+    
+    <button class="accordion">Section 1</button>
+    <div class="panel" data-section="Section-1">
+      <p><strong>What is the place you would take someone in the Merri-bek area for the first time?</strong></p>
+      <div class="audio-block">
+        <button class="btn btn-record action-record">Record</button>
+        <button class="btn btn-stop action-stop" disabled>Stop</button>
+        <button class="btn btn-delete action-delete" disabled>Delete & Retry</button>
+        <button class="btn btn-save action-save" disabled>Save to Cloud</button>
+        <div class="timer-display">00:30</div>
+        <div class="status-msg">Ready to record response.</div>
+        <div class="player-container"></div>
+      </div>
+    </div>
+
+    <button class="accordion">Section 2</button>
+    <div class="panel" data-section="Section-2">
+      <p><strong>What's special about this place?</strong></p>
+      <div class="audio-block">
+        <button class="btn btn-record action-record">Record</button>
+        <button class="btn btn-stop action-stop" disabled>Stop</button>
+        <button class="btn btn-delete action-delete" disabled>Delete & Retry</button>
+        <button class="btn btn-save action-save" disabled>Save to Cloud</button>
+        <div class="timer-display">00:30</div>
+        <div class="status-msg">Ready to record response.</div>
+        <div class="player-container"></div>
+      </div>
+    </div>
+
+    <button class="accordion">Section 3</button>
+    <div class="panel" data-section="Section-3">
+      <p><strong>Record a short memory or reflection about what makes this place special to you.</strong></p>
+      <div class="audio-block">
+        <button class="btn btn-record action-record">Record</button>
+        <button class="btn btn-stop action-stop" disabled>Stop</button>
+        <button class="btn btn-delete action-delete" disabled>Delete & Retry</button>
+        <button class="btn btn-save action-save" disabled>Save to Cloud</button>
+        <div class="timer-display">00:30</div>
+        <div class="status-msg">Ready to record response.</div>
+        <div class="player-container"></div>
+      </div>
+    </div>
+
+    <p style="margin-top: 1.875rem; font-size: 0.9em; font-style: italic;">
+      Site Signals is a project seeking to understand and document the community's relationship with specific places and how it informs understanding of self, community and perceived inclusivity.
+    </p>
+  </div>
+
+  <script>
+    var acc = document.getElementsByClassName("accordion");
+    for (var i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        panel.style.display = (panel.style.display === "block") ? "none" : "block";
+      });
+    }
+  </script>
+
+  <script>
+    const GOOGLE_DEPLOYMENT_ID = "AKfycbwzIUMFGjldqiFCFWebQmd0z9zV1pIpzttMtV8nNOw2IxCPmozGQebUPkMawOo8BT8A"; 
+    const CLOUD_ENDPOINT = `https://script.google.com/macros/s/${GOOGLE_DEPLOYMENT_ID}/exec`; 
+    const MAX_RECORD_TIME = 30; 
+
+    let activeRecorder = null;
+    let activeStream = null;
+    let activeInterval = null;
+    let recordedChunks = [];
+
+    const sectionData = {
+      "Section-1": { blob: null, saved: false },
+      "Section-2": { blob: null, saved: false },
+      "Section-3": { blob: null, saved: false }
+    };
+
+    document.querySelectorAll('.panel').forEach(panel => {
+      const sectionId = panel.getAttribute('data-section');
+      const btnRecord = panel.querySelector('.action-record');
+      const btnStop = panel.querySelector('.action-stop');
+      const btnDelete = panel.querySelector('.action-delete');
+      const btnSave = panel.querySelector('.action-save');
+      const timerDisplay = panel.querySelector('.timer-display');
+      const statusMsg = panel.querySelector('.status-msg');
+      const playerContainer = panel.querySelector('.player-container');
+
+      let timeLeft = MAX_RECORD_TIME;
+
+      btnRecord.addEventListener('click', async () => {
+        recordedChunks = [];
+        timeLeft = MAX_RECORD_TIME;
+        timerDisplay.textContent = `00:${timeLeft < 10 ? '0' : ''}${timeLeft}`;
+
+        try {
+          activeStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          activeRecorder = new MediaRecorder(activeStream, { mimeType: 'audio/webm' });
+
+          activeRecorder.ondataavailable = (e) => {
+            if (e.data.size > 0) recordedChunks.push(e.data);
+          };
+
+          activeRecorder.onstop = () => {
+            sectionData[sectionId].blob = new Blob(recordedChunks, { type: 'audio/webm' });
+            
+            const audioUrl = URL.createObjectURL(sectionData[sectionId].blob);
+            playerContainer.innerHTML = `<audio controls src="${audioUrl}" style="margin-top:12px; width:100%;"></audio>`;
+            
+            statusMsg.textContent = "Recording captured. Review your audio above, delete to retry, or save to complete.";
+            btnDelete.disabled = false;
+            btnSave.disabled = false;
+            
+            if(activeStream) {
+              activeStream.getTracks().forEach(track => track.stop());
+            }
+          };
+
+          activeRecorder.start();
+          statusMsg.textContent = "Recording live... Speak clearly.";
+          btnRecord.disabled = true;
+          btnStop.disabled = false;
+
+          activeInterval = setInterval(() => {
+            timeLeft--;
+            timerDisplay.textContent = `00:${timeLeft < 10 ? '0' : ''}${timeLeft}`;
+            if (timeLeft <= 0) {
+              statusMsg.textContent = "Time limit reached.";
+              stopCurrentRecording();
+            }
+          }, 1000);
+
+        } catch (err) {
+          console.error("Microphone initialization error:", err);
+          statusMsg.textContent = "Unable to start recording. Please check microphone permissions.";
+        }
+      });
+
+      btnStop.addEventListener('click', () => {
+        stopCurrentRecording();
+      });
+
+      function stopCurrentRecording() {
+        clearInterval(activeInterval);
+        if (activeRecorder && activeRecorder.state !== 'inactive') {
+          activeRecorder.stop();
+        }
+        btnStop.disabled = true;
+      }
+
+      btnDelete.addEventListener('click', () => {
+        sectionData[sectionId].blob = null;
+        playerContainer.innerHTML = "";
+        
+        btnRecord.disabled = false;
+        btnStop.disabled = true;
+        btnDelete.disabled = true;
+        btnSave.disabled = true;
+        
+        timeLeft = MAX_RECORD_TIME;
+        timerDisplay.textContent = `00:${MAX_RECORD_TIME}`;
+        statusMsg.textContent = "Recording cleared. Ready to try again.";
+      });
+
+      btnSave.addEventListener('click', () => {
+        const targetBlob = sectionData[sectionId].blob;
+        if (!targetBlob) return;
+
+        statusMsg.textContent = "Saving to archive... Please do not close this window.";
+        btnSave.disabled = true;
+        btnDelete.disabled = true;
+
+        const questionElement = panel.querySelector('p strong') || panel.querySelector('p');
+        const questionText = questionElement ? questionElement.textContent : "Question";
+
+        const now = new Date();
+        const formattedTime = now.getFullYear() + "-" + 
+                              String(now.getMonth() + 1).padStart(2, '0') + "-" + 
+                              String(now.getDate()).padStart(2, '0') + "_" + 
+                              String(now.getHours()).padStart(2, '0') + "-" + 
+                              String(now.getMinutes()).padStart(2, '0') + "-" + 
+                              String(now.getSeconds()).padStart(2, '0');
+
+        const reader = new FileReader();
+        reader.readAsDataURL(targetBlob);
+        reader.onloadend = async function() {
+          const base64String = reader.result;
+          
+          const payload = "audio_data=" + encodeURIComponent(base64String) +
+                          "&section_name=" + encodeURIComponent(sectionId) +
+                          "&question_text=" + encodeURIComponent(questionText) +
+                          "&formatted_time=" + encodeURIComponent(formattedTime);
+          
+          try {
+            const response = await fetch(CLOUD_ENDPOINT, {
+              method: "POST",
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              body: payload
+            });
+            
+            const result = await response.json();
+
+            if (result.status === "success") {
+              statusMsg.textContent = "Successfully saved! Thank you.";
+              sectionData[sectionId].saved = true;
+              
+              btnRecord.disabled = true;
+              btnStop.disabled = true;
+              btnDelete.disabled = true;
+              btnSave.disabled = true;
+            } else {
+              throw new Error(result.error || "Server storage error.");
+            }
+          } catch (error) {
+            console.error("Upload Error:", error);
+            statusMsg.textContent = "Upload failed. Please try clicking save again.";
+            btnSave.disabled = false;
+            btnDelete.disabled = false;
+          }
+        };
+      });
+    });
+  </script>
+</body>
+</html>
