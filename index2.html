@@ -375,43 +375,43 @@
 
         const reader = new FileReader();
         reader.readAsDataURL(targetBlob);
-        reader.onloadend = async function() {
-          const base64String = reader.result;
-          
-          const payload = "audio_data=" + encodeURIComponent(base64String) +
-                          "&section_name=" + encodeURIComponent(sectionId) +
-                          "&question_text=" + encodeURIComponent(questionText) +
-                          "&formatted_time=" + encodeURIComponent(formattedTime);
-          
-          try {
-            const response = await fetch(CLOUD_ENDPOINT, {
-              method: "POST",
-              headers: { "Content-Type": "application/x-www-form-urlencoded" },
-              body: payload
-            });
-            
-            const result = await response.json();
+        
+          reader.onloadend = async function() {
+  // 1. Strip out the "data:audio/webm;base64," header prefix
+  const base64String = reader.result.split(',')[1]; 
+  
+  const payload = "audio_data=" + encodeURIComponent(base64String) +
+                  "&section_name=" + encodeURIComponent(sectionId) +
+                  "&question_text=" + encodeURIComponent(questionText) +
+                  "&formatted_time=" + encodeURIComponent(formattedTime);
+  
+  try {
+    const response = await fetch(CLOUD_ENDPOINT, {
+      method: "POST",
+      mode: "no-cors", // 2. CRITICAL: Prevents CORS redirect errors from Google
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: payload
+    });
+    
+    // 3. CRITICAL: With 'no-cors', the response type is opaque. 
+    // You cannot read response.json() because security blocks it.
+    // We assume success if the fetch promise resolves without throwing.
+    
+    statusMsg.textContent = "Successfully saved! Thank you.";
+    sectionData[sectionId].saved = true;
+    
+    btnRecord.disabled = true;
+    btnStop.disabled = true;
+    btnDelete.disabled = true;
+    btnSave.disabled = true;
 
-            if (result.status === "success") {
-              statusMsg.textContent = "Successfully saved! Thank you.";
-              sectionData[sectionId].saved = true;
-              
-              btnRecord.disabled = true;
-              btnStop.disabled = true;
-              btnDelete.disabled = true;
-              btnSave.disabled = true;
-            } else {
-              throw new Error(result.error || "Server storage error.");
-            }
-          } catch (error) {
-            console.error("Upload Error:", error);
-            statusMsg.textContent = "Upload failed. Please try clicking save again.";
-            btnSave.disabled = false;
-            btnDelete.disabled = false;
-          }
+  } catch (error) {
+    console.error("Upload Error:", error);
+    statusMsg.textContent = "Upload failed. Please try clicking save again.";
+    btnSave.disabled = false;
+    btnDelete.disabled = false;
         };
       });
-    });
   </script>
 </body>
 </html>
